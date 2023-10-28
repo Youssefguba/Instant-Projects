@@ -1,4 +1,4 @@
-# Flutter Fundmentals Projects 🐣
+# Flutter Fundmentals Projects 🔥
 
 Welcome to the "Flutter Fundmentals Projects" GitHub repository! This repository contains a collection of projects that were developed to teach students the fundamentals of Flutter and Dart. These projects are designed to help students build a strong foundation in mobile app development using the Flutter framework and the Dart programming language.
 

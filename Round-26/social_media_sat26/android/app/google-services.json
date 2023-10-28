@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "389716641082",
+    "firebase_url": "https://socialsat-default-rtdb.firebaseio.com",
+    "project_id": "socialsat",
+    "storage_bucket": "socialsat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389716641082:android:ad8b3ca61850ae2348bc03",
+        "android_client_info": {
+          "package_name": "com.social.media.sat26.social_media_sat26"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389716641082-m22jk6ji9mub9tq76ve8pir9t6085opb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.social.media.sat26.social_media_sat26",
+            "certificate_hash": "efebcf442e862ecda4b93692b38f6285b2cdef2e"
+          }
+        },
+        {
+          "client_id": "389716641082-qnho2ckofufc4c79e2k3lhd7c3dde612.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPwFPHR6AWcJepjhN_HrYfYo49tWvZGC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389716641082-qnho2ckofufc4c79e2k3lhd7c3dde612.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "389716641082-ju16lo2kvpolh3o9ev1omlhnr8pr431i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.social.media.sat26.socialMediaSat26"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

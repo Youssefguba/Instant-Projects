@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_st26/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_st26/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_st26/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_sat26/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_sat26/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/social_media_sat26/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/ecommerce_st28_second/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/ecommerce_st28_second/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/ecommerce_st28_second/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/ecommerce_app_ST26/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/ecommerce_app_ST26/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-26/ecommerce_app_ST26/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/start_project_sat28/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/start_project_sat28/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Round-28/start_project_sat28/.pub" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

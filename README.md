@@ -1,8 +1,8 @@
-# Flutter Fundmentals Projects
+# Flutter Fundmentals Projects 🐣
 
 Welcome to the "Flutter Fundmentals Projects" GitHub repository! This repository contains a collection of projects that were developed to teach students the fundamentals of Flutter and Dart. These projects are designed to help students build a strong foundation in mobile app development using the Flutter framework and the Dart programming language.
 
-## Table of Contents
+## Table of Contents 📄
 
 1. [Introduction](#introduction)
 2. [Project Descriptions](#project-descriptions)
@@ -24,7 +24,7 @@ The repository includes the following projects:
 
 3. **Social Media App:** A Social-media application built with Firebase, teaching students about authentication, cloud storage, and Firestore.
 
-## Getting Started
+## Getting Started 🚀
 
 To get started with these projects, follow these steps:
 
@@ -44,7 +44,7 @@ To get started with these projects, follow these steps:
 
 4. Feel free to use, modify, and adapt the projects to your teaching needs. You can also encourage your students to fork the repository and work on their own versions of the projects.
 
-## Contributing
+## Contributing 👨🏻‍💻
 
 We welcome contributions from the community, whether it's fixing a bug, adding a new project, or improving the documentation. If you'd like to contribute to this repository, please follow these steps:
 

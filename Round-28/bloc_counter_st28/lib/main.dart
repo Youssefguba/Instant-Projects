@@ -13,13 +13,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CounterCubit(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      child: BlocBuilder<CounterCubit, CounterState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: state is CounterChangedSuccessfully
+                    ? state.randomColor
+                    : Colors.deepPurple,
+              ),
+              useMaterial3: true,
+            ),
+            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          );
+        },
       ),
     );
   }
@@ -62,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 }
 
-                if(state is CounterGreaterThanTen) {
+                if (state is CounterGreaterThanTen) {
                   return Text(
                     'Congratulations !! 🔥 ',
                     style: Theme.of(context).textTheme.headlineMedium,

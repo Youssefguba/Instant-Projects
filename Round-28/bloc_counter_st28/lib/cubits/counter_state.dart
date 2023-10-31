@@ -8,8 +8,10 @@ class CounterInitial extends CounterState {}
 class CounterChangedSuccessfully extends CounterState {
   final int counter;
 
-  CounterChangedSuccessfully(this.counter);
+  final Color  randomColor;
+  CounterChangedSuccessfully(this.counter, this.randomColor);
 
 }
+
 class CounterGreaterThanTen extends CounterState {}
 

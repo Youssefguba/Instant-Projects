@@ -19,7 +19,7 @@ class UserRepository {
         "name": name,
         "phone": phone,
         "email": email,
-        "password": phone,
+        "password": password,
         "image": "",
       },
     );

@@ -9,11 +9,14 @@ class NewsGeneralResponse {
     required this.articles,
   });
 
-  factory NewsGeneralResponse.fromJson(Map<String, dynamic> json) => NewsGeneralResponse(
-    status: json["status"],
-    totalResults: json["totalResults"],
-    articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
-  );
+  factory NewsGeneralResponse.fromJson(Map<String, dynamic> json) {
+    return NewsGeneralResponse(
+      status: json["status"],
+      totalResults: json["totalResults"],
+      articles: List<Article>.from(
+          json["articles"].map((x) => Article.fromJson(x))),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "status": status,

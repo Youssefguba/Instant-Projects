@@ -1,5 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:start_project_sat28/repository/category_repository.dart';
+
+import '../model/category_model.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -62,7 +66,6 @@ class HomeScreen extends StatelessWidget {
       Colors.green,
       11,
       3,
-
     ),
     CategoryItem(
       'assets/images/shirt.png',
@@ -71,20 +74,18 @@ class HomeScreen extends StatelessWidget {
       15,
       4,
     ),
-
   ];
 
-  final Map<int, Color> listOfStyle =
-    {
-      1: Colors.black,
-      2: Colors.orange,
-      3: Colors.greenAccent,
-      4: Colors.red,
-    };
-
+  final Map<int, Color> listOfStyle = {
+    1: Colors.black,
+    2: Colors.orange,
+    3: Colors.greenAccent,
+    4: Colors.red,
+  };
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -121,28 +122,58 @@ class HomeScreen extends StatelessWidget {
               }).toList(),
             ),
 
-            SizedBox(
-              height: 100,
-              child: ListView.builder(
-                itemCount: listOfCategoryTwo.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-
-                  return Column(
-                    children: [
-                      categoryItem(listOfCategoryTwo[index].image),
-                      Text(
-                        listOfCategoryTwo[index].categoryName,
-                        style: TextStyle(
-                          color: listOfStyle[listOfCategoryTwo[index].code],
-                          fontSize: listOfCategoryTwo[index].fontSize,
+            // Category Section
+            FutureBuilder(
+                future: CategoryRepository().getCategories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
+                      height: 100.0,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey.shade200,
+                        highlightColor: Colors.white,
+                        child: ListView.separated(
+                          itemCount: 6,
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(width: 10);
+                          },
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CircleAvatar(
+                              radius: 30,
+                            );
+                          },
                         ),
                       ),
-                    ],
+                    );
+                  }
+
+                  if (snapshot.hasData) {
+                    final CategoryModel category = snapshot.data!;
+                    return SizedBox(
+                      height: 100,
+                      child: ListView.builder(
+                        itemCount: category.data.data.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              categoryItem(category.data.data[index].image),
+                              Text(
+                                category.data.data[index].name,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    );
+                  }
+
+                  return SizedBox(
+                    child: Text('No Data Found!'),
                   );
-                },
-              ),
-            ),
+                }),
+
             // Category
             // Container(
             //   margin: const EdgeInsets.all(8.0),
@@ -173,12 +204,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 31,
-            backgroundColor: Colors.orange,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.white,
-              child: Image.asset(image),
-            ),
+            backgroundColor: Colors.grey,
+            backgroundImage: NetworkImage(image),
           ),
         ],
       ),
@@ -196,5 +223,6 @@ class CategoryItem {
   final double fontSize;
 
   final int code;
-  CategoryItem(this.image, this.categoryName, this.color, this.fontSize, this.code);
+  CategoryItem(
+      this.image, this.categoryName, this.color, this.fontSize, this.code);
 }

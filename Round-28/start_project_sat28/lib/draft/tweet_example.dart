@@ -1,4 +1,5 @@
-import 'test_twitter_model.dart';
+
+import 'package:start_project_sat28/draft/test_twitter_model.dart';
 
 void main() {
   final tweet = TweetModel.fromJson(map);

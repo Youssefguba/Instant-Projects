@@ -34,7 +34,7 @@ class CounterCubit extends Cubit<CounterState> {
     final int random = Random().nextInt(listOfColors.length);
     final randomColor = listOfColors[random];
 
-    if(random <= 1000) return;
+    if(random >= 1000) return;
 
     counter++;
     // if (counter >= 10) {

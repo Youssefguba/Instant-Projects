@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:threads_app_st28/cubits/add_post_cubit/add_new_post_cubit.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({Key? key}) : super(key: key);
@@ -10,39 +10,45 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  final TextEditingController controller = TextEditingController();
+  final addNewPostCubit = AddNewPostCubit();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              FirebaseFirestore.instance.collection('posts').add({
-                'content': controller.text,
-                'id': FirebaseAuth.instance.currentUser?.uid,
-                'createdAt': DateTime.now().toString(),
-                'photoUser': FirebaseAuth.instance.currentUser?.photoURL,
-              });
-            },
-            child: const Text('Post'),
-          ),
-        ],
-      ),
-      body: TextFormField(
-        controller: controller,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.all(12),
-          hintText: 'Ehbd Ay kalam',
-        ),
-        maxLines: 50,
+    return BlocProvider(
+      create: (context) => addNewPostCubit,
+      child: BlocBuilder<AddNewPostCubit, AddNewPostState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              actions: [
+                TextButton(
+                  onPressed: state is AddNewPostLoading
+                      ? null
+                      : () {
+                          addNewPostCubit.addPost(context);
+                        },
+                  child: const Text('Post'),
+                ),
+              ],
+            ),
+            body: state is AddNewPostLoading
+                ? const Center(child: CircularProgressIndicator())
+                : TextFormField(
+                    controller: addNewPostCubit.controller,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.all(12),
+                      hintText: 'Ehbd Ay kalam',
+                    ),
+                    maxLines: 50,
+                  ),
+          );
+        },
       ),
     );
   }

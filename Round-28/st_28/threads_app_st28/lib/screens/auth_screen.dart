@@ -14,7 +14,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    print('My current user ${FirebaseAuth.instance.currentUser}');
+    // print('My current user ${FirebaseAuth.instance.currentUser}');
 
     // Future.delayed(const Duration(seconds: 2), () {
     //   if (FirebaseAuth.instance.currentUser != null) {

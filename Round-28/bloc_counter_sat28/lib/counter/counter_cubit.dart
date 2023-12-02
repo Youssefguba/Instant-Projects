@@ -26,8 +26,12 @@ class CounterCubit extends Cubit<CounterState> {
     final randomNumber = Random().nextInt(listOfColors.length);
     final randomColor = listOfColors[randomNumber];
 
-    counter++;
+    counter += 10;
 
     emit(CounterChanged(counter, randomColor));
+
+    // recursive - recursion
+    Future.delayed(const Duration(milliseconds: 300), incrementCounter);
   }
+
 }

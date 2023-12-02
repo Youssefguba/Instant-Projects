@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Text(
                     state.counter.toString(),
                     style: TextStyle(
-                      fontSize: state.counter * 5,
+                      fontSize: 20,
                     ),
                   );
                 }

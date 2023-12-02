@@ -8,7 +8,7 @@ final class TimelineInitial extends TimelineState {}
 final class TimelineLoading extends TimelineState {}
 
 final class TimelineSuccess extends TimelineState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> posts;
+  final List<PostModel> posts;
 
   TimelineSuccess(this.posts);
 }

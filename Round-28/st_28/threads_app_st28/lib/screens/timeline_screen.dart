@@ -19,6 +19,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
   void initState() {
     super.initState();
     context.read<TimelineCubit>().getTimeline();
+    initializeDateFormatting();
   }
 
   @override
@@ -30,13 +31,8 @@ class _TimelineScreenState extends State<TimelineScreen> {
             shrinkWrap: true,
             itemCount: state.posts.length,
             itemBuilder: (context, index) {
-              final singlePost = state.posts[index];
-              initializeDateFormatting();
-              final date = DateFormat.yMEd('ar').format(
-                DateTime.parse(
-                  singlePost.data()['createdAt'],
-                ),
-              );
+              final postItem = state.posts[index];
+              final date = DateFormat.yMEd('ar').format(postItem.createdAt);
 
               // FirebaseFirestore.instance.collection('users').where(
               //       'userId',
@@ -44,11 +40,14 @@ class _TimelineScreenState extends State<TimelineScreen> {
               //     ).get();
 
               return ListTile(
-                title: Text('Author'),
-                subtitle: Text(singlePost.data()['content']),
+                title: Text(postItem.user.name),
+                subtitle: Text(postItem.content),
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(postItem.user.photo),
+                ),
                 trailing: Text(
                   date.toString(),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               );
             },

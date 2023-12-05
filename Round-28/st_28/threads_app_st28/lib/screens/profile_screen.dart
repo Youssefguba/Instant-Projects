@@ -7,13 +7,20 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final userId = FirebaseAuth.instance.currentUser!.uid;
-    // FirebaseFirestore.collection('users').where('userId', isEquals: userId);
+
+    /// Better
+    // FirebaseFirestore.collection('users').doc(userId).get();
+
+    /// BAD
+    // FirebaseFirestore.collection('users').where('userId', isEquals: userId).get();
+
+
     return Center(
       child: TextButton(
         onPressed: () {
           FirebaseAuth.instance.signOut();
         },
-        child: Text('Logout'),
+        child: const Text('Logout'),
       ),
     );
   }

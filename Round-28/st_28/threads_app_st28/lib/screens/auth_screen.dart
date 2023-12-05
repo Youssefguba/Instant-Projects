@@ -36,59 +36,66 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.userChanges(),
-      builder: (context, snapshot) {
-        final user = snapshot.data;
-        if(user != null) {
-          return const HomeScreen();
-        } else {
-          return Scaffold(
-            backgroundColor: Colors.black,
-            body: Column(
-              children: [
-                Image.asset('assets/images/background_img.png'),
-                Container(
-                  margin: const EdgeInsets.all(12),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: const Color(0xff191919),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+        stream: FirebaseAuth.instance.userChanges(),
+        builder: (context, snapshot) {
+          final user = snapshot.data;
+          if (user != null) {
+            return const HomeScreen();
+          } else {
+            return Scaffold(
+              backgroundColor: Colors.black,
+              body: Column(
+                children: [
+                  Image.asset('assets/images/background_img.png'),
+                  Container(
+                    margin: const EdgeInsets.all(12),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: const Color(0xff191919),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    onPressed: () async {
-                      final userCredential = await signInWithGoogle();
-                      final userId = userCredential.user?.uid;
-                      // FirebaseFirestore.instance.collection('users').add({
-                      //   'userId': userCredential.user?.uid,
-                      //   'username': userCredential.user?.displayName,
-                      // });
-                      final userModel = UserModel(
-                        id: userId!,
-                        name: userCredential.user!.displayName!,
-                        photo: userCredential.user!.photoURL!,
-                      );
+                      onPressed: () async {
+                        final userCredential = await signInWithGoogle();
+                        final userId = userCredential.user?.uid;
 
-                      FirebaseFirestore.instance.collection('users').doc(userId).set(userModel.toJson());
-                    },
-                    child: const ListTile(
-                      title: Text(
-                        'Login with Google',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      subtitle: Text(
-                        '@Youssefguba',
-                        style: TextStyle(color: Colors.white),
+                        final userModel = UserModel(
+                          id: userId!,
+                          name: userCredential.user!.displayName!,
+                          photo: userCredential.user!.photoURL!,
+                        );
+
+                        /// Better
+                        // FirebaseFirestore.instance
+                        //     .collection('users')
+                        //     .doc(userId)
+                        //     .set(userModel.toJson());
+
+                        /// Bad
+                        // FirebaseFirestore.instance.collection('users').add({
+                        //   'userId': userCredential.user?.uid,
+                        //   'username': userCredential.user?.displayName,
+                        // });
+
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          'Login with Google',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          '@Youssefguba',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }
-      }
-    );
+                ],
+              ),
+            );
+          }
+        });
   }
 
   Future<UserCredential> signInWithGoogle() async {
@@ -113,4 +120,3 @@ class _AuthScreenState extends State<AuthScreen> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
-

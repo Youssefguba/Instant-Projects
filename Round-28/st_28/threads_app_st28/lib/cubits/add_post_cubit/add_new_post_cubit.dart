@@ -16,7 +16,9 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
       if (controller.text.isNotEmpty) {
         emit(AddNewPostLoading());
 
-        await FirebaseFirestore.instance.collection('posts').add({
+        final id = FirebaseFirestore.instance.collection('posts').doc().id;
+        await FirebaseFirestore.instance.collection('posts').doc(id).set({
+          'postId': id,
           'content': controller.text,
           'authorId': FirebaseAuth.instance.currentUser?.uid,
           'createdAt': DateTime.now().toString(),

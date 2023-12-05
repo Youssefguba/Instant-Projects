@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:threads_app_st28/screens/home_screen.dart';
+
+import '../models/user_model.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -53,8 +56,20 @@ class _AuthScreenState extends State<AuthScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {
-                      signInWithGoogle();
+                    onPressed: () async {
+                      final userCredential = await signInWithGoogle();
+                      final userId = userCredential.user?.uid;
+                      // FirebaseFirestore.instance.collection('users').add({
+                      //   'userId': userCredential.user?.uid,
+                      //   'username': userCredential.user?.displayName,
+                      // });
+                      final userModel = UserModel(
+                        id: userId!,
+                        name: userCredential.user!.displayName!,
+                        photo: userCredential.user!.photoURL!,
+                      );
+
+                      FirebaseFirestore.instance.collection('users').doc(userId).set(userModel.toJson());
                     },
                     child: const ListTile(
                       title: Text(
@@ -98,3 +113,4 @@ class _AuthScreenState extends State<AuthScreen> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
+

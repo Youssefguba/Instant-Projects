@@ -6,6 +6,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final userId = FirebaseAuth.instance.currentUser!.uid;
+    // FirebaseFirestore.collection('users').where('userId', isEquals: userId);
     return Center(
       child: TextButton(
         onPressed: () {

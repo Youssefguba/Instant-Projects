@@ -6,6 +6,9 @@ class ProductItem {
   final String name;
   final double price;
 
+  bool isAdded = false;
+
+
   ProductItem({
     required this.id,
     required this.color,

@@ -1,4 +1,5 @@
 import 'package:cart_cubit_sat28/cubits/cart_cubit.dart';
+import 'package:cart_cubit_sat28/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:badges/badges.dart' as badges;
@@ -30,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 showBadge: true,
                 position: badges.BadgePosition.topEnd(top: -5, end: 4),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {return CartScreen();}));
+                  },
                   icon: const Icon(
                     Icons.shopping_cart,
                   ),
@@ -42,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: ListView.builder(
-        itemCount: context.read<CartCubit>().productList.length,
+        itemCount: context.watch<CartCubit>().productList.length,
         itemBuilder: (context, index) {
-          final productItem = context.read<CartCubit>().productList[index];
+          final productItem = context.watch<CartCubit>().productList[index];
           return ListTile(
             leading: Container(
               decoration: BoxDecoration(
@@ -57,7 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text(productItem.name),
             subtitle: Text('\$${productItem.price}'),
             trailing: TextButton(
-              child: const Text('Add'),
+              child: productItem.isAdded
+                  ? const Icon(Icons.check)
+                  : const Text('Add'),
               onPressed: () {
                 context.read<CartCubit>().addToCart(productItem);
               },

@@ -14,7 +14,6 @@ class CartCubit extends Cubit<CartState> {
         color: const Color(0xFF3498db),
         name: 'Blue Shirt',
         price: 29.99),
-
     ProductItem(
         id: 2,
         color: const Color(0xFFe74c3c),
@@ -25,7 +24,6 @@ class CartCubit extends Cubit<CartState> {
         color: const Color(0xFF2ecc71),
         name: 'Green Backpack',
         price: 39.99),
-
     ProductItem(
         id: 4,
         color: const Color(0xFFf39c12),
@@ -116,13 +114,25 @@ class CartCubit extends Cubit<CartState> {
   final List<ProductItem> listOfCartItem = [];
 
   void addToCart(ProductItem item) {
-    if(listOfCartItem.contains(item)) return;
+    // if (listOfCartItem.contains(item)) return;
 
+    item.isAdded = true;
     listOfCartItem.add(item);
 
-    if(listOfCartItem.contains(item)) {
+    if (listOfCartItem.contains(item)) {
       emit(ItemIsAdded(item.name));
+
+      Future.delayed(Duration(seconds: 1), () {
+        item.isAdded = false;
+        emit(ItemIsAdded(item.name));
+      });
     }
   }
 
+  void removeFromCart(ProductItem item) {
+    if (listOfCartItem.contains(item)) {
+      listOfCartItem.remove(item);
+      emit(ItemIsAdded(item.name));
+    }
+  }
 }

@@ -8,6 +8,7 @@ part 'counter_state.dart';
 
 class CounterCubit extends Cubit<CounterState> {
   CounterCubit() : super(CounterInitial());
+
   int counter = 0;
 
   final List<Color> listOfColors = [
@@ -26,12 +27,16 @@ class CounterCubit extends Cubit<CounterState> {
     final randomNumber = Random().nextInt(listOfColors.length);
     final randomColor = listOfColors[randomNumber];
 
-    counter += 10;
+    counter += 20;
 
     emit(CounterChanged(counter, randomColor));
 
     // recursive - recursion
-    Future.delayed(const Duration(milliseconds: 300), incrementCounter);
+    // Future.delayed(const Duration(milliseconds: 300), incrementCounter);
   }
 
+  void reset()  {
+    counter = 0;
+    emit(CounterSuccess());
+  }
 }

@@ -57,33 +57,50 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            BlocBuilder<CounterCubit, CounterState>(
-              builder: (context, state) {
+            BlocConsumer<CounterCubit, CounterState>(
+              listener: (context, state) {
                 if (state is CounterChanged) {
-                  return Text(
-                    state.counter.toString(),
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  );
+                  if (state.counter == 100) {
+                   context.read<CounterCubit>().reset();
+                  }
                 }
-
-                if (state is CounterSuccess) {
-                  return Text(
-                    'Finished',
-                    style: const TextStyle(
-                      fontSize: 70,
-                      color: Colors.orange,
-                    ),
-                  );
-                }
-                // B        Lo  c
-                // Business Logic
-                return Text(
-                  'Start',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
               },
+              builder: (context, state) {
+                return Container();
+              },
+            ),
+            BlocListener<CounterCubit, CounterState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              child: BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  if (state is CounterChanged) {
+                    return Text(
+                      state.counter.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    );
+                  }
+
+                  if (state is CounterSuccess) {
+                    return Text(
+                      'Finished',
+                      style: const TextStyle(
+                        fontSize: 70,
+                        color: Colors.orange,
+                      ),
+                    );
+                  }
+                  // B        Lo  c
+                  // Business Logic
+                  return Text(
+                    'Start',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+              ),
             ),
           ],
         ),

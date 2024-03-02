@@ -19,11 +19,11 @@ class HomeScreen extends StatelessWidget {
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (route) => false,
                 );
               },
-              child: Text('Logout'),
+              child: const Text('Logout'),
             ),
           ],
         ),
